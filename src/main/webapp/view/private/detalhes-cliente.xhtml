@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+		
+		<p:fieldset legend="Detalhes do Cliente">
+
+				
+				   <h:form id="formDetalhesCliente">				     
+					  
+					  <center>	   					
+					   	<p:growl for="detalhesCli" id="growl" showDetail="true" autoUpdate="true" closable="true"/>
+					   	
+						<p:panelGrid id="panelDetalheCli" columns="2" style="width: 50%; border: 1px solid;">
+						
+						<f:facet name="header">								
+								<p:menuButton value="Ações disponíveis">
+									<p:menuitem value="Voltar" icon="fa fa-step-backward" url="/view/private/consultar-cliente.xhtml"/>
+									<p:menuitem value="Editar Cliente" icon="fa fa-pencil" action="#{consultarClienteBean.clienteParaEditar(consultarClienteBean.clienteSelecionado())}"/>
+									<p:menuitem value="Excluir Cliente" icon="fa fa-trash-o" action="#{consultarClienteBean.excluirCliente(consultarClienteBean.clienteSelecionado())}" update="@form">							 
+										<p:confirm header="Excluir Cliente" message="Confirma essa ação?" icon="ui-icon-alert" />							
+									</p:menuitem>
+								</p:menuButton>			
+								
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					        <p:commandButton value="Confirmar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					        <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					    </p:confirmDialog>
+											
+						</f:facet>
+												 
+						    <h:outputLabel for="nome" value="Nome:" />
+						    <h:outputText value="#{consultarClienteBean.clienteSelecionado().nome}" id="nome" />
+						 
+						    <h:outputLabel for="email" value="E-mail:" />
+						    <h:outputText value="#{consultarClienteBean.clienteSelecionado().email}" id="email" />
+						 
+						    <h:outputLabel for="nascimento" value="Nascimento:" />
+						    <h:outputText value="#{consultarClienteBean.clienteSelecionado().dataNascimento}" id="nascimento">
+						 	<f:convertDateTime pattern="dd-MM-yyyy" />
+						 	</h:outputText>
+						    
+						    <h:outputLabel for="cep" value="CEP:" />
+						    <h:outputText value="#{consultarClienteBean.clienteSelecionado().endereco.cep}" id="cep" />
+						    
+						    <h:outputLabel for="logradouro" value="logradouro:" rendered="#{consultarClienteBean.clienteSelecionado().endereco.logradouro != null}" />
+						    <h:outputText id="logradouro" value="#{consultarClienteBean.clienteSelecionado().endereco.logradouro}" rendered="#{consultarClienteBean.clienteSelecionado().endereco.logradouro != null}" />
+						    
+						    <h:outputLabel for="complemento" value="Complemento:" rendered="#{consultarClienteBean.clienteSelecionado().endereco.complemento != null}" />
+						    <h:outputText id="complemento" value="#{consultarClienteBean.clienteSelecionado().endereco.complemento}" rendered="#{consultarClienteBean.clienteSelecionado().endereco.complemento != null}" />
+						    
+						    <h:outputLabel for="bairro" value="Bairro:" rendered="#{consultarClienteBean.clienteSelecionado().endereco.bairro != null}" />
+						    <h:outputText id="bairro" value="#{consultarClienteBean.clienteSelecionado().endereco.bairro}" rendered="#{consultarClienteBean.clienteSelecionado().endereco.bairro != null}" />
+						    
+						    <h:outputLabel for="cidade" value="Cidade:" />
+						    <h:outputText id="cidade" value="#{consultarClienteBean.clienteSelecionado().endereco.cidade}" />
+						    
+						    <h:outputLabel for="uf" value="UF:" />
+						    <h:outputText id="uf" value="#{consultarClienteBean.clienteSelecionado().endereco.uf}" />
+						    
+						</p:panelGrid>
+				
+					  </center>
+						
+					</h:form>
+							
+		</p:fieldset>
+
+	</ui:define>
+
+</ui:composition>

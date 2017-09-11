@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form>
+	
+	<p:tabMenu activeIndex="#{param.i}">
+
+		<p:menuitem value="Início" url="/view/index.xhtml" icon="fa fa-home" iconPos="top">
+		<f:param name="i" value="0" />
+		</p:menuitem>		
+		
+		<p:menuitem value="Cadastro de Usuários" url="/view/public/cadastrar-usuario.xhtml" icon="fa fa-pencil-square-o" iconPos="top">
+		<f:param name="i" value="1" />
+		</p:menuitem>		
+		
+		<p:menuitem value="Login" url="/view/public/login.xhtml" icon="fa fa-sign-in"  iconPos="top">
+		<f:param name="i" value="2" />
+		</p:menuitem>	
+			
+	</p:tabMenu>
+	
+	
+	
+	
+</h:form>
+
+</html>

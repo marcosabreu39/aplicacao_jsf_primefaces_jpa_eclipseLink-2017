@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+.ui-datatable 
+		tr.ui-datatable-even:hover, .ui-datatable 
+		tr.ui-datatable-odd:hover {
+	background: rgb(173, 216, 230);
+	color: white;
+}

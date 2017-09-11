@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset legend="Cadastro de clientes">
+
+			<h:form prependId="false" id="formCadCli">
+					
+				<center>
+					<p:growl for="cadUser" id="growl" showDetail="true" autoUpdate="true" closable="true"/>
+					
+								
+					<p:panelGrid id="panelForm" columns="3" styleClass="ui-noborder">
+					
+					<p:outputLabel>*CEP:</p:outputLabel>						
+						<p:inputMask id="cep" value="#{cadastrarClienteBean.endereco.cep}" mask="99999-999" placeholder="Insira seu CEP" requiredMessage="Campo obrigatório" required="true">
+							<p:ajax event="keyup" listener="#{cadastrarClienteBean.buscarCep()}" />
+						</p:inputMask>
+						<p:message for="cep" severity="error" />	
+						
+						<p:outputLabel>Logradouro:</p:outputLabel>						
+						<p:inputText id="logradouro" value="#{cadastrarClienteBean.endereco.logradouro}" placeholder="Ex: Rua 7 de setembro" />
+						<p:message for="logradouro" severity="error" />
+						
+						<p:outputLabel>Complemento:</p:outputLabel>						
+						<p:inputText id="complemento" value="#{cadastrarClienteBean.endereco.complemento}" placeholder="Ex: bloco 5, ap 201" />
+						<p:message for="complemento" severity="error" />
+						
+						<p:outputLabel>Bairro:</p:outputLabel>						
+						<p:inputText id="bairro" value="#{cadastrarClienteBean.endereco.bairro}" placeholder="Ex: Irajá" />
+						<p:message for="bairro" severity="error" />
+						
+						<p:outputLabel>*Cidade:</p:outputLabel>						
+						<p:inputText id="cidade" value="#{cadastrarClienteBean.endereco.cidade}" placeholder="Cidade entre 4 e 40 caracteres" requiredMessage="Campo obrigatório" required="true" />
+						<p:message for="cidade" severity="error" />	
+								
+						<p:outputLabel>*UF:</p:outputLabel>
+			        	<p:selectOneMenu id="uf" value="#{cadastrarClienteBean.endereco.uf}" placeholder="Selecione a UF" requiredMessage="Campo obrigatório" required="true">
+			            	<f:selectItem itemLabel="UF" itemValue="" />
+			            	<f:selectItems value="#{cadastrarClienteBean.ufs()}" var="uf" itemLabel="#{uf.estado}" itemValue="#{uf.name()}"  />
+			        	</p:selectOneMenu>
+						<p:message for="uf" severity="error" />
+					
+						<p:outputLabel>*Nome:</p:outputLabel>						
+						<p:inputText id="nome" value="#{cadastrarClienteBean.cliente.nome}" placeholder="Nome entre 4 e 40 caracteres" requiredMessage="Campo obrigatório" required="true" />
+						<p:message for="nome" severity="error" />
+						
+						<p:outputLabel>*E-mail:</p:outputLabel>						
+						<p:inputText id="email" value="#{cadastrarClienteBean.cliente.email}" placeholder="Insira um e-mail válido" requiredMessage="Campo obrigatório" required="true" />
+						<p:message for="email" severity="error" />
+						
+						<p:outputLabel>*Data de nascimento:</p:outputLabel>						
+						<p:calendar id="nascimento" value="#{cadastrarClienteBean.cliente.dataNascimento}" navigator="true" mode="inline" yearRange="c-70:c+10" placeholder="Selecione a data de nascimento" 
+						requiredMessage="Campo obrigatório" required="true" locale="pt" mask="true" maxdate="#{cadastrarClienteBean.dataMin()}" />
+						<p:message for="nascimento" severity="error" />
+															
+						<p:commandButton action="#{cadastrarClienteBean.cadastrarCliente()}" update="@form" value="Cadastrar" id="submit" icon="fa fa-save" />						
+						
+					</p:panelGrid>
+				</center>
+			</h:form>
+						
+		</p:fieldset>
+
+	</ui:define>
+
+</ui:composition>

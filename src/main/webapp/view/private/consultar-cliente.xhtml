@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset legend="Consultar Cliente">
+
+				<center>
+				 <p:growl for="consuCliGrowl" id="consultarCliGrowl" showDetail="true" autoUpdate="true" closable="true"/>
+				
+				   <h:form prependId="false" id="formClientes">
+				   
+				   <p:remoteCommand autoRun="true" name="rc" update="@form" rendered="#{empty consultarClienteBean.clientes}" actionListener="#{consultarClienteBean.buscarTodosClientes()}" />  
+				   
+				      <p:dataTable id="tabClientes" value="#{consultarClienteBean.clientes}" var="cliente" emptyMessage="Nenhum cliente foi localizado" style="width: 50%;">
+									
+						<f:facet name="header">
+							<p:commandButton id="cb" value="Buscar todos Clientes" actionListener="#{consultarClienteBean.buscarTodosClientes()}" update="@form" />
+						</f:facet>			
+													
+					     <p:column filterBy="#{cliente.nome}" id="cNome" filterStyle="width: 60%;" sortBy="#{cliente.nome}" headerText="Buscar cliente pelo nome" style="width: 60%; text-align: center;" filterEvent="change">
+       						<h:outputText id="nome" value="#{cliente.nome}" />
+       					  </p:column>
+														
+							<p:column width="10%" id="colunaMenu" style="text-align: center;" rendered="#{not empty consultarClienteBean.clientes}">
+																
+								<f:facet name="header">Menu</f:facet>
+								
+								<p:menuButton id="menu" value="Ações">
+									<p:menuitem id="menuA" value="Selecionar Cliente" icon="fa fa-eye " action="#{consultarClienteBean.detalhesDoCliente(cliente)}" />
+									<p:menuitem id="menuB" value="Editar Cliente" icon="fa fa-pencil " action="#{consultarClienteBean.clienteParaEditar(cliente)}"/>								 
+									<p:menuitem value="Excluir Cliente" icon="fa fa-trash-o" action="#{consultarClienteBean.excluirCliente(cliente)}" update="@form">							 
+										<p:confirm header="Excluir Cliente" message="Confirma essa ação?" icon="ui-icon-alert" />							
+									</p:menuitem>	
+								</p:menuButton>
+								
+								<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							        <p:commandButton value="Confirmar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							        <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							    </p:confirmDialog>
+								
+							 </p:column>		
+														
+						</p:dataTable>
+					</h:form>
+					
+				</center>
+			
+		</p:fieldset>
+
+	</ui:define>
+
+</ui:composition>
