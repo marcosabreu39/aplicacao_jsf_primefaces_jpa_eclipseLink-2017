@@ -5,13 +5,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import com.appweb.dao.ClienteDao;
 import com.appweb.model.Cliente;
 
 @Stateless
@@ -21,12 +25,18 @@ public class Util implements Serializable {
 	/**
 	 * 
 	 */
+
+	@EJB
+	ClienteDao clienteDao;
+
 	private static final long serialVersionUID = 1L;
 
 	public void msgInfoGrowl(String detalhes, String mensagem, String componente) {
 		try {
+
 			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, detalhes, mensagem);
 			FacesContext.getCurrentInstance().addMessage(componente, fm);
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -43,6 +53,16 @@ public class Util implements Serializable {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void msgErro(String mensagem, String idComponente) {
+		try {
+			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, null);
+			FacesContext.getCurrentInstance().addMessage(idComponente, fm);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 	}
 
 	public void atualizarComponente(String idComponente) {
@@ -158,6 +178,35 @@ public class Util implements Serializable {
 		}
 
 		return dataMinima;
+
+	}
+
+	public boolean emailApto(String email, String idComponente) {
+		boolean apto = false;
+
+		try {
+			if (email != null && !email.equals("")) {
+
+				if (clienteDao.emailNaoCadastrado(email)) {
+
+					apto = true;
+
+				} else {
+
+					msgErro("E-mail já cadastrado.", idComponente);
+
+				}
+
+			} else {
+
+				msgErroGrowl("Erro", "Erro para checar o e-mail", idComponente);
+
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return apto;
 
 	}
 

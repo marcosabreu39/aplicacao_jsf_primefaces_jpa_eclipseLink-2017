@@ -10,6 +10,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.context.RequestContext;
+
 import com.appweb.dao.ClienteDao;
 import com.appweb.model.Cliente;
 import com.appweb.model.Endereco;
@@ -111,15 +113,13 @@ public class ConsultarClienteController implements Serializable {
 
 		try {
 
-			this.cliente = cliente;
-
-			util.colocarBeanNaSessao(this.cliente);
+			util.colocarBeanNaSessao(cliente);
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
-		return "/view/private/detalhes-cliente.xhtml";
+		return "/view/private/detalhes-cliente.xhtml?faces-redirect=true";
 
 	}
 
@@ -134,24 +134,34 @@ public class ConsultarClienteController implements Serializable {
 			e.printStackTrace();
 		}
 
-		return "/view/private/editar-cliente.xhtml";
+		return "/view/private/editar-cliente.xhtml?faces-redirect=true";
 
 	}
 
-	public Cliente clienteSelecionado() {
+	public void clienteSelecionado() {
 
 		Cliente client = new Cliente();
 
 		try {
 
-			client = util.pegarBeanNaSessao();
+			if (cliente.getNome() == null || cliente.getNome().equals("")) {
+
+				Object clienteObj = util.pegarBeanNaSessao();
+
+				client = (Cliente) clienteObj;
+
+				setCliente(client);
+
+				client = new Cliente();
+
+				util.colocarBeanNaSessao(client);
+
+			}
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
-
-		return client;
 
 	}
 
@@ -187,24 +197,21 @@ public class ConsultarClienteController implements Serializable {
 
 	}
 
-	public String atualizarCliente(Cliente cliente) {
-
-		String retorno = null;
+	public void atualizarCliente(Cliente cliente) {
 
 		try {
 
-			if (cliente != null && !cliente.equals("")) {
+			if (cliente.getNome() != null && !cliente.getNome().equals("")) {
 
-				clienteDao.merge(cliente);
+				if (util.emailApto(cliente.getEmail(), "email")) {
 
-				util.colocarBeanNaSessao(cliente);
+					clienteDao.merge(cliente);
 
-				util.msgInfoGrowl("Sucesso", "Atualização cadastral concluída", "detalhesCli");
+					util.colocarBeanNaSessao(cliente);
 
-				retorno = "/view/private/detalhes-cliente.xhtml";
+					util.msgInfoGrowl("Sucesso", "Atualização cadastral concluída", "msgGrowl");
 
-				FacesContext context = FacesContext.getCurrentInstance();
-				context.getExternalContext().getFlash().setKeepMessages(true);
+				}
 
 			} else {
 
@@ -216,34 +223,34 @@ public class ConsultarClienteController implements Serializable {
 			e.printStackTrace();
 		}
 
-		return retorno;
 	}
 
-	public String excluirCliente(Cliente cliente) {
+	public void excluirCliente(Cliente cliente) {
+		
 
 		try {
 
-			if (cliente != null && !cliente.equals("")) {
+			if (cliente.getNome() != null && !cliente.getNome().equals("")) {
 
 				clienteDao.remove(cliente);
-
+				
+				clientes.clear();
+				
 				util.msgInfoGrowl("Sucesso", "Cliente removido", "consuCliGrowl");
-
+				
 			} else {
 
 				util.msgErroGrowl("Erro", "Não foi possível remover o cliente", "consuCliGrowl");
 
 			}
-
-			FacesContext context = FacesContext.getCurrentInstance();
-			context.getExternalContext().getFlash().setKeepMessages(true);
+			
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
+		
 
-		return "/view/private/consultar-cliente.xhtml?faces-redirect=true";
 	}
 
 	public Date dataMin() {

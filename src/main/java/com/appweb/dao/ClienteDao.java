@@ -11,7 +11,6 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
-import com.appweb.dao.GenericDao;
 import com.appweb.model.Cliente;
 
 @Stateless
@@ -120,6 +119,29 @@ public class ClienteDao implements GenericDao<Cliente>, Serializable {
 		}
 
 		return retorno;
+	}
+
+	public boolean emailNaoCadastrado(String email) {
+		boolean valido = false;
+
+		try {
+
+			String jpql = "SELECT c FROM Cliente c WHERE c.email = :email";
+
+			TypedQuery<Cliente> query = em.createQuery(jpql, Cliente.class);
+
+			query.setParameter("email", email);
+
+			List<Cliente> c = query.getResultList();
+
+			valido = c.isEmpty() ? true : valido;
+
+		} catch (PersistenceException e) {
+
+			e.printStackTrace();
+		}
+
+		return valido;
 	}
 
 }

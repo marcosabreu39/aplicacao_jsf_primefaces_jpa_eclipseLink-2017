@@ -110,16 +110,19 @@ public class CadastrarClienteController implements Serializable {
 					&& endereco.getCidade() != null && endereco.getUf() != null && !endereco.getCidade().equals("")
 					&& !endereco.getUf().equals("")) {
 
-				cliente.setEndereco(endereco);
+				if (util.emailApto(cliente.getEmail(), "email")) {
 
-				clienteDao.persist(cliente);
+					cliente.setEndereco(endereco);
 
-				cliente = new Cliente();
+					clienteDao.persist(cliente);
 
-				endereco = new Endereco();
+					cliente = new Cliente();
 
-				util.msgInfoGrowl("Sucesso", "Cadastro Concluído", "cadUser");
+					endereco = new Endereco();
 
+					util.msgInfoGrowl("Sucesso", "Cadastro Concluído", "cadUser");
+
+				}
 			}
 
 		} catch (Exception e) {

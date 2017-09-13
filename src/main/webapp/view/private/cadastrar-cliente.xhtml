@@ -20,40 +20,40 @@
 					<p:panelGrid id="panelForm" columns="3" styleClass="ui-noborder">
 					
 					<p:outputLabel>*CEP:</p:outputLabel>						
-						<p:inputMask id="cep" value="#{cadastrarClienteBean.endereco.cep}" mask="99999-999" placeholder="Insira seu CEP" requiredMessage="Campo obrigatório" required="true">
+						<p:inputMask id="cep" value="#{cadastrarClienteBean.endereco.cep}" mask="99999-999" placeholder="Insira seu CEP" requiredMessage="Campo obrigatório" required="true" style="width : 300px;" >
 							<p:ajax event="keyup" listener="#{cadastrarClienteBean.buscarCep()}" />
 						</p:inputMask>
 						<p:message for="cep" severity="error" />	
 						
 						<p:outputLabel>Logradouro:</p:outputLabel>						
-						<p:inputText id="logradouro" value="#{cadastrarClienteBean.endereco.logradouro}" placeholder="Ex: Rua 7 de setembro" />
+						<p:inputText id="logradouro" value="#{cadastrarClienteBean.endereco.logradouro}" placeholder="Ex: Rua 7 de setembro" style="width : 300px;" />
 						<p:message for="logradouro" severity="error" />
 						
 						<p:outputLabel>Complemento:</p:outputLabel>						
-						<p:inputText id="complemento" value="#{cadastrarClienteBean.endereco.complemento}" placeholder="Ex: bloco 5, ap 201" />
+						<p:inputText id="complemento" value="#{cadastrarClienteBean.endereco.complemento}" placeholder="Ex: bloco 5, ap 201" style="width : 300px;" />
 						<p:message for="complemento" severity="error" />
 						
 						<p:outputLabel>Bairro:</p:outputLabel>						
-						<p:inputText id="bairro" value="#{cadastrarClienteBean.endereco.bairro}" placeholder="Ex: Irajá" />
+						<p:inputText id="bairro" value="#{cadastrarClienteBean.endereco.bairro}" placeholder="Ex: Irajá" style="width : 300px;" />
 						<p:message for="bairro" severity="error" />
 						
 						<p:outputLabel>*Cidade:</p:outputLabel>						
-						<p:inputText id="cidade" value="#{cadastrarClienteBean.endereco.cidade}" placeholder="Cidade entre 4 e 40 caracteres" requiredMessage="Campo obrigatório" required="true" />
+						<p:inputText id="cidade" value="#{cadastrarClienteBean.endereco.cidade}" placeholder="Cidade entre 4 e 40 caracteres" requiredMessage="Campo obrigatório" required="true" style="width : 300px;" />
 						<p:message for="cidade" severity="error" />	
 								
 						<p:outputLabel>*UF:</p:outputLabel>
-			        	<p:selectOneMenu id="uf" value="#{cadastrarClienteBean.endereco.uf}" placeholder="Selecione a UF" requiredMessage="Campo obrigatório" required="true">
+			        	<p:selectOneMenu id="uf" value="#{cadastrarClienteBean.endereco.uf}" placeholder="Selecione a UF" requiredMessage="Campo obrigatório" required="true" style="width : 300px;">
 			            	<f:selectItem itemLabel="UF" itemValue="" />
 			            	<f:selectItems value="#{cadastrarClienteBean.ufs()}" var="uf" itemLabel="#{uf.estado}" itemValue="#{uf.name()}"  />
 			        	</p:selectOneMenu>
 						<p:message for="uf" severity="error" />
 					
 						<p:outputLabel>*Nome:</p:outputLabel>						
-						<p:inputText id="nome" value="#{cadastrarClienteBean.cliente.nome}" placeholder="Nome entre 4 e 40 caracteres" requiredMessage="Campo obrigatório" required="true" />
+						<p:inputText id="nome" value="#{cadastrarClienteBean.cliente.nome}" placeholder="Nome entre 4 e 40 caracteres" requiredMessage="Campo obrigatório" required="true" style="width : 300px;" />
 						<p:message for="nome" severity="error" />
 						
 						<p:outputLabel>*E-mail:</p:outputLabel>						
-						<p:inputText id="email" value="#{cadastrarClienteBean.cliente.email}" placeholder="Insira um e-mail válido" requiredMessage="Campo obrigatório" required="true" />
+						<p:inputText id="email" value="#{cadastrarClienteBean.cliente.email}" placeholder="Insira um e-mail válido" requiredMessage="Campo obrigatório" required="true" style="width : 300px;" />
 						<p:message for="email" severity="error" />
 						
 						<p:outputLabel>*Data de nascimento:</p:outputLabel>						
