@@ -1,0 +1,14 @@
+com/appweb/util/UfsEnum.class
+com/appweb/dao/ClienteDao.class
+com/appweb/dao/UsuarioDao.class
+com/appweb/util/Util.class
+com/appweb/model/Cliente.class
+com/appweb/service/BuscaEnderecoService.class
+com/appweb/controller/CadastrarClienteController.class
+com/appweb/model/Endereco.class
+com/appweb/controller/CadastrarUsuarioController.class
+com/appweb/model/Usuario.class
+com/appweb/dao/GenericDao.class
+com/appweb/controller/LoginController.class
+com/appweb/filter/Filtro.class
+com/appweb/controller/ConsultarClienteController.class

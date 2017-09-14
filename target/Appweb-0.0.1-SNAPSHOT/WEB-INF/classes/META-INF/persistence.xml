@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  
+  <persistence-unit name="appwebPU" transaction-type="JTA">
+    
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    
+    <jta-data-source>java/oracleDS</jta-data-source>      
+    
+    <class>com.appweb.model.Usuario</class>
+    <class>com.appweb.model.Cliente</class>
+    <class>com.appweb.model.Endereco</class>
+    
+    <properties>     
+    <property name="javax.persistence.jtaDataSource" value="java/oracleDS"/>		
+	<property name="eclipselink.logging.timestamp" value="false"/>
+	<property name="eclipselink.logging.thread" value="false"/>
+	<property name="eclipselink.logging.session" value="false"/>
+	<property name="eclipselink.logging.exceptions" value="true"/>
+	<property name="eclipselink.logging.connection" value="false"/>
+	<property name="eclipselink.logging.level" value="INFO"/>
+	<property name="eclipselink.logging.level.sql" value="FINE"/>
+	<property name="eclipselink.logging.parameters" value="true"/>
+	<property name="eclipselink.logging.logger" value="JavaLogger"/>
+	<property name="eclipselink.cache.shared.default" value="false" />
+	<property name="eclipselink.logging.level" value="FINE"/>
+	<property name="eclipselink.ddl-generation.output-mode" value="database" />
+    <property name="eclipselink.ddl-generation" value="create-tables"/>                 
+    </properties> 
+                
+  </persistence-unit>
+  
+</persistence>

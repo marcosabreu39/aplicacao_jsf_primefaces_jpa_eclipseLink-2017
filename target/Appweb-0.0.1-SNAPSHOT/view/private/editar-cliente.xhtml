@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset legend="Editar Cliente">
+
+			<center>
+
+				<h:form prependId="false" id="formEditCli">
+
+					<p:remoteCommand name="rcCli" autoRun="true" update="@form"
+						process="@this"
+						actionListener="#{consultarClienteBean.clienteSelecionado()}"
+						rendered="#{empty consultarClienteBean.cliente.nome}" />
+
+					<p:growl for="msgGrowl" id="growl" showDetail="true"
+						autoUpdate="true" closable="true" />
+
+					<p:panelGrid id="panelForm" columns="3" styleClass="ui-noborder">
+
+						<p:outputLabel>*CEP:</p:outputLabel>
+						<p:inputMask id="cep"
+							value="#{consultarClienteBean.cliente.endereco.cep}"
+							mask="99999-999" placeholder="Insira seu CEP"
+							requiredMessage="Campo obrigatório" required="true"
+							style="width : 300px;">
+							<p:ajax event="keyup"
+								listener="#{consultarClienteBean.buscarCep(consultarClienteBean.cliente.endereco)}" />
+						</p:inputMask>
+						<p:message for="cep" severity="error" />
+
+						<p:outputLabel>Logradouro:</p:outputLabel>
+						<p:inputText id="logradouro"
+							value="#{consultarClienteBean.cliente.endereco.logradouro}"
+							placeholder="Ex: Rua 7 de setembro" style="width : 300px;" />
+						<p:message for="logradouro" severity="error" />
+
+						<p:outputLabel>Complemento:</p:outputLabel>
+						<p:inputText id="complemento"
+							value="#{consultarClienteBean.cliente.endereco.complemento}"
+							placeholder="Ex: bloco 5, ap 201" style="width : 300px;" />
+						<p:message for="complemento" severity="error" />
+
+						<p:outputLabel>Bairro:</p:outputLabel>
+						<p:inputText id="bairro"
+							value="#{consultarClienteBean.cliente.endereco.bairro}"
+							placeholder="Ex: Irajá" style="width : 300px;" />
+						<p:message for="bairro" severity="error" />
+
+						<p:outputLabel>*Cidade:</p:outputLabel>
+						<p:inputText id="cidade"
+							value="#{consultarClienteBean.cliente.endereco.cidade}"
+							placeholder="Cidade entre 4 e 40 caracteres"
+							requiredMessage="Campo obrigatório" required="true"
+							style="width : 300px;" />
+						<p:message for="cidade" severity="error" />
+
+						<p:outputLabel>*UF:</p:outputLabel>
+						<p:selectOneMenu id="uf"
+							value="#{consultarClienteBean.cliente.endereco.uf}"
+							placeholder="Selecione a UF" requiredMessage="Campo obrigatório"
+							required="true" style="width : 300px;">
+							<f:selectItem itemLabel="UF" itemValue="" />
+							<f:selectItems value="#{cadastrarClienteBean.ufs()}" var="uf"
+								itemLabel="#{uf.estado}" itemValue="#{uf.name()}"
+								style="width : 300px;" />
+						</p:selectOneMenu>
+						<p:message for="uf" severity="error" />
+
+						<p:outputLabel>*Nome:</p:outputLabel>
+						<p:inputText id="nome"
+							value="#{consultarClienteBean.cliente.nome}"
+							placeholder="Nome entre 4 e 40 caracteres"
+							requiredMessage="Campo obrigatório" required="true"
+							style="width : 300px;" />
+						<p:message for="nome" severity="error" />
+
+						<p:outputLabel>*E-mail:</p:outputLabel>
+						<p:inputText id="email"
+							value="#{consultarClienteBean.cliente.email}"
+							placeholder="Insira um e-mail válido"
+							requiredMessage="Campo obrigatório" required="true"
+							style="width : 300px;" />
+						<p:message for="email" severity="error" />
+
+						<p:outputLabel>*Data de nascimento:</p:outputLabel>
+						<p:calendar id="nascimento"
+							value="#{consultarClienteBean.cliente.dataNascimento}"
+							navigator="true" mode="inline" yearRange="c-70:c+10"
+							placeholder="Selecione a data de nascimento"
+							requiredMessage="Campo obrigatório" required="true" locale="pt"
+							mask="true" maxdate="#{consultarClienteBean.dataMin()}"
+							readonly="true" />
+						<p:message for="nascimento" severity="error" />
+
+						<p:commandButton
+							action="#{consultarClienteBean.atualizarCliente(consultarClienteBean.cliente)}"
+							value="Atualizar" id="submit" icon="fa fa-save" update="@form">
+							<p:confirm header="Atualizar dados cadastrais"
+								message="Confirma essa ação?" icon="ui-icon-alert" />
+						</p:commandButton>
+
+					</p:panelGrid>
+
+				</h:form>
+
+				<h:form>
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<h:form>
+							<p:commandButton value="Confirmar" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Cancelar" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</h:form>
+					</p:confirmDialog>
+				</h:form>
+
+			</center>
+
+		</p:fieldset>
+
+	</ui:define>
+
+</ui:composition>

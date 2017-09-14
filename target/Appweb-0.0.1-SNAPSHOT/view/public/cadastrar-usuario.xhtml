@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:fieldset legend="Cadastro de usuários">
+
+			<h:form prependId="false" id="formCadUser">
+					
+				<center>
+								
+					<p:panelGrid id="panelForm" columns="3" styleClass="ui-noborder">
+					
+						<p:outputLabel>Nome:</p:outputLabel>						
+						<p:inputText id="nome" value="#{cadastrarUsuarioBean.usuario.nome}" placeholder="Nome entre 4 e 25 caracteres" requiredMessage="Campo obrigatório" required="true" />
+						<p:message for="nome" severity="error" />
+						
+						<p:outputLabel>Login:</p:outputLabel>						
+						<p:inputText id="login" value="#{cadastrarUsuarioBean.usuario.login}" placeholder="login entre 4 e 12 caracteres" requiredMessage="Campo obrigatório" required="true" />
+						<p:message for="login" severity="error" />
+						
+						<p:outputLabel>Senha:</p:outputLabel>						
+						<p:password id="senha" value="#{cadastrarUsuarioBean.usuario.senha}" placeholder="Senha entre 4 e 10 caracteres " requiredMessage="Campo obrigatório" required="true" />
+						<p:message for="senha" severity="error" />
+									
+						<p:commandButton action="#{cadastrarUsuarioBean.cadastrarUsuario()}" update="@form" value="Cadastrar" id="submit" icon="fa fa-save" />						
+						
+					</p:panelGrid>
+				</center>
+			</h:form>
+						
+		</p:fieldset>
+
+	</ui:define>
+
+</ui:composition>

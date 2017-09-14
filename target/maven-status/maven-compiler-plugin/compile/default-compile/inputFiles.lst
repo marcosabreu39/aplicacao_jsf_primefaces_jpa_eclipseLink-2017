@@ -1,0 +1,14 @@
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/util/UfsEnum.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/controller/CadastrarUsuarioController.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/controller/ConsultarClienteController.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/model/Cliente.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/model/Endereco.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/dao/ClienteDao.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/util/Util.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/filter/Filtro.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/service/BuscaEnderecoService.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/controller/LoginController.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/dao/UsuarioDao.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/dao/GenericDao.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/controller/CadastrarClienteController.java
+/home/marcos/Documentos/workspace/Appweb/src/main/java/com/appweb/model/Usuario.java

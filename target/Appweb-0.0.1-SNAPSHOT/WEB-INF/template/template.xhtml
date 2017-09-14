@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputScript library="js" name="locale-primefaces.js"/>	
+
+	<h:outputStylesheet library="css" name="style.css" />
+	<link type="text/css" rel="stylesheet"
+		href="primefaces-glass-x/theme.css" />
+
+	<h:outputStylesheet library="awesome" name="css/font-awesome.css" />
+
+	<h:outputStylesheet library="stylesheet"
+		name="webapp/resources/style.css" />
+		
+		<title><ui:insert name="title">Aplicação web</ui:insert></title>
+		
+</h:head>
+
+<h:body>
+
+	<p:layout fullPage="true">
+		<p:layoutUnit position="center">
+
+			<div id="header">
+			
+				<ui:fragment rendered="#{not empty loginBean.login}">
+				<ui:include src="/WEB-INF/template/headerLogado.xhtml" />
+				</ui:fragment>	
+				
+				<ui:fragment rendered="#{empty loginBean.login}">
+				<ui:include src="/WEB-INF/template/header.xhtml" />
+				</ui:fragment>
+			
+			</div>
+			<br />
+			<br />
+			<div id="content" style="min-height: 600px;">
+
+				<ui:insert name="content" />
+
+			</div>
+
+			<div id="footer">
+
+				<ui:include src="/WEB-INF/template/footer.xhtml" />
+
+			</div>
+
+		</p:layoutUnit>
+	</p:layout>
+
+</h:body>
+
+</html>
