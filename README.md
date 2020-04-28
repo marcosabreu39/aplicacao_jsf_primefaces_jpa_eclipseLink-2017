@@ -12,3 +12,4 @@
 * CDI;
 * Servidor de Aplicação Glassfish 4.1;
 * Banco de dados Oracle 11g;
+* IDE Eclipse Oxygen.
