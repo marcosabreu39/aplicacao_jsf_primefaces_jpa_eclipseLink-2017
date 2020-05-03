@@ -3,6 +3,7 @@
 ## Tecnologias
 
 * Arquitetura MVC;
+* Design Pattern DAO;
 * JavaServer Faces 2.2;
 * Primefaces 6;
 * JPA2(Eclipselink);
