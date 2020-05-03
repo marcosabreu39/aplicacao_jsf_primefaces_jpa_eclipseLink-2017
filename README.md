@@ -2,6 +2,7 @@
 
 ## Tecnologias
 
+* Java 8;
 * Arquitetura MVC;
 * Design Pattern DAO;
 * JavaServer Faces 2.2;
