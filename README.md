@@ -1,4 +1,4 @@
-# Aplicação Web
+# Aplicação Web com JSF e Eclipselink
 
 ## Tecnologias
 
